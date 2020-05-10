@@ -1,12 +1,30 @@
-node {
- 	stage('Git') {
-		git 'https://github.com/satishchennu1/nodejspipeline.git'
-	}
-	stage('Build') {
-		sh 'npm install'
-	}
-	stage('Test') {
-		sh 'npm test'
-	}
+pipeline {
+  agent any
     
+  tools {nodejs "nodejs"}
+    
+  stages {
+        
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/satishchennu1/nodejspipeline.git'
+      }
+    }
+        
+    stage('Install dependencies') {
+      steps {
+        sh 'npm install'
+      }
+    }
+     
+    stage('Test') {
+      steps {
+         sh 'npm test'
+      }
+    }      
+  }
 }
+
+
+
+
